@@ -16,23 +16,30 @@ public enum CardNum{
     KING(13,10);
 
     private final int number;
-    private final int points;
-    CardNum(int number, int points){
+    private final int strenght;
+    CardNum(int number, int strenght){
         this.number = number;
-        this.points = points;
+        this.strenght = strenght;
     }
 
     public int getNumber(){
         return number;
     }
 
-    public int getPoints(){
-        return points;
+    public int getStrenght(){
+        return strenght;
     }
 
     public int comparePoints(CardNum cardNum){
-        int substraction = this.getPoints() - cardNum.getPoints();
+        int substraction = this.getStrenght() - cardNum.getStrenght();
         if (substraction == 0){ return 0;}else if(substraction > 0) {return 1;}else return -1;
+    }
+
+    public static CardNum getCardNum(int points){
+        for(CardNum cardNum : values()){
+            if(cardNum.getStrenght() == points) return cardNum;
+        }
+        return null;
     }
 
 }
