@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -114,8 +115,15 @@ public class ModelFacade {
      * @param cardsOnTable
      * @return
      */
-    public String[] getPlayerPossibleMoves(List<String> cardsOnTable) {
-        if(cardsOnTable == null){//This means there's nothing on table
+    public List<String> getPlayerPossibleMoves(String player, String cardsOnTable) {
+        Collection<String> playerPossibleMoves = new ArrayList<>();
+        if(cardsOnTable == null){//This means there's nothing on table so we just get all the possible combinations
+            return gameContainer.getAllPlayerCombinations(player);
         }
+        return null;
+    }
+
+    public void sortPlayersHands() {
+        gameContainer.sortPlayersHands();
     }
 }

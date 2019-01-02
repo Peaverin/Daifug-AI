@@ -1,4 +1,7 @@
 package model;
+
+import java.util.List;
+
 enum TurnState{
     PLAYING,
     LOST_TURN,
@@ -17,7 +20,7 @@ public class Player {
         hand = new PlayerHand();
     }
     public void addCard(Card card){
-        hand.put(card.getRank().toString() + Integer.toString(card.getNum().getNumber()),card);
+        hand.put(card.toString() ,card);
     }
 
     public Card takeBestCard(){
@@ -42,5 +45,13 @@ public class Player {
 
     public TurnState getTurnState() {
         return turnState;
+    }
+
+    public List<String> getAllCombinations(){
+        return hand.getAllCombinations();
+    }
+
+    public void sortHand(){
+        hand.sort();
     }
 }

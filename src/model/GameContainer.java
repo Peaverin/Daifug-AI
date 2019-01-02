@@ -5,9 +5,12 @@ import java.util.*;
 public class GameContainer {
     private Deck deck;
     private Map<String, Player> playerList;
+    private ArrayDeque<Card[]> tableHeap;
+
 
     public GameContainer(){
         playerList = new LinkedHashMap<>();
+        tableHeap = new ArrayDeque<>();
     }
 
     public Collection<String> getPlayerNamesCollection() {
@@ -64,5 +67,15 @@ public class GameContainer {
 
     public TurnState getPlayerTurnState(String player) {
         return playerList.get(player).getTurnState();
+    }
+
+    public List<String> getAllPlayerCombinations(String player){
+        return playerList.get(player).getAllCombinations();
+    }
+
+    public void sortPlayersHands() {
+        for(String key : playerList.keySet()){
+            playerList.get(key).sortHand();
+        }
     }
 }

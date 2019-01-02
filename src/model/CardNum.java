@@ -31,8 +31,7 @@ public enum CardNum{
     }
 
     public int comparePoints(CardNum cardNum){
-        int substraction = this.getStrenght() - cardNum.getStrenght();
-        if (substraction == 0){ return 0;}else if(substraction > 0) {return 1;}else return -1;
+        return this.getStrenght() - cardNum.getStrenght();
     }
 
     public static CardNum getCardNum(int points){
@@ -46,4 +45,8 @@ public enum CardNum{
         return this.number == number;
     }
 
+    @Override
+    public String toString(){
+        return Integer.toString(number);
+    }
 }

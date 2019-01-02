@@ -3,6 +3,7 @@ package controller;
 import model.ModelFacade;
 import model.PIFException;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class GameController {
@@ -13,6 +14,7 @@ public class GameController {
     private String extremelyPoor;
     private String currentPlayer;
     private boolean turnStarted;
+    private String lastCards;
     Scanner sc;
     public GameController(){
         modelFacade = new ModelFacade();
@@ -27,6 +29,8 @@ public class GameController {
         modelFacade.dealCards(grandMillionare, millionaire, poor, extremelyPoor);
         modelFacade.exchangeCards(grandMillionare, millionaire, poor, extremelyPoor);
         //
+        //We sort all players hands:
+        modelFacade.sortPlayersHands();
         currentPlayer = modelFacade.getPlayerWithThreeOfClubs();
         roundLoop();
     }
@@ -62,13 +66,12 @@ public class GameController {
     private void roundLoop(){
         System.out.println("A new round starts. It's " + currentPlayer + "'s turn.");
         //Current player starts the turn:
-        String[] playerMovesList = modelFacade.getPlayerPossibleMoves(null);
+        List<String> playerMovesList = modelFacade.getPlayerPossibleMoves(currentPlayer,null);
         String playerMoves = "";
         for(String move : playerMovesList){
-            playerMoves += "'"+move+"', ";
+            playerMoves += "'"+move+"' ";
         }
-        System.out.println("Possible moves for " + currentPlayer + "are: " + playerMoves + ".")
-        ;
+        System.out.println("Possible moves for " + currentPlayer + " are: " + playerMoves);
     }
 
 }
