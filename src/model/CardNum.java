@@ -42,4 +42,8 @@ public enum CardNum{
         return null;
     }
 
+    public boolean isNumber(int number){
+        return this.number == number;
+    }
+
 }

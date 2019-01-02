@@ -1,15 +1,21 @@
 package model;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class GameContainer {
     private Deck deck;
     private Map<String, Player> playerList;
 
-    public Collection<String> getPlayerNames() {
+    public GameContainer(){
+        playerList = new LinkedHashMap<>();
+    }
+
+    public Collection<String> getPlayerNamesCollection() {
         return playerList.keySet();
+    }
+
+    public Collection<Player> getPlayerCollection(){
+        return playerList.values();
     }
 
     public void addPlayer(String name, PlayerIntelligence pI){
@@ -46,5 +52,17 @@ public class GameContainer {
 
     public Card[] takeTwoBestCardsFromPlayer(String player){
         return playerList.get(player).takeTwoBestCards();
+    }
+
+    public String getNextPlayer(String currentPlayer) {
+        List<String> stringList = new ArrayList<>(playerList.keySet());
+        int nextIndex = stringList.indexOf(currentPlayer);
+        nextIndex++;
+        if(nextIndex >= stringList.size()) nextIndex = 0;
+        return stringList.get(nextIndex);
+    }
+
+    public TurnState getPlayerTurnState(String player) {
+        return playerList.get(player).getTurnState();
     }
 }

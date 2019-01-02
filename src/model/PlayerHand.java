@@ -1,13 +1,14 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class PlayerHand extends ArrayList<Card> {
+public class PlayerHand extends HashMap<String, Card> {
 
     public Card takeBestCard() {
         Card bestCard = null;
         int bestValue = 0;
-        for(Card card : this){
+        for(Card card : this.values()){
             int cardStrenght = card.getStrenght();
             if (cardStrenght > bestValue){
                 bestValue = cardStrenght;
@@ -22,7 +23,7 @@ public class PlayerHand extends ArrayList<Card> {
         Card secondBestCard = null;
         int bestValue = -1;
         int secondBestValue = -1;
-        for(Card card : this){
+        for(Card card : this.values()){
             int cardStrenght = card.getStrenght();
             if (cardStrenght > bestValue){
                 secondBestCard = bestCard;
@@ -35,5 +36,12 @@ public class PlayerHand extends ArrayList<Card> {
             }
         }
         return new Card[]{bestCard, secondBestCard};
+    }
+
+    public boolean containsCard(CardRank cardRank, CardNum cardNum) {
+        for(Card card : this.values()){
+            if(card.getRank() == cardRank && card.getNum() == cardNum) return true;
+        }
+        return false;
     }
 }
