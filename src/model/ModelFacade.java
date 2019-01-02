@@ -116,7 +116,6 @@ public class ModelFacade {
      */
     public String[] getPlayerPossibleMoves(List<String> cardsOnTable) {
         if(cardsOnTable == null){//This means there's nothing on table
-            
         }
     }
 }
